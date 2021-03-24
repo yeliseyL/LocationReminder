@@ -222,6 +222,8 @@ class SaveReminderFragment : BaseFragment() {
         val intent = Intent(requireContext(), GeofenceBroadcastReceiver::class.java)
         intent.action = ACTION_GEOFENCE_EVENT
 
+        geofencingClient = LocationServices.getGeofencingClient(requireContext())
+
         geofencingClient.addGeofences(geofencingRequest, geofencePendingIntent)?.run {
             addOnSuccessListener {
                 Log.i("BroadcastReceiver", "added geofences" + reminderData.latitude + " " + reminderData.longitude)
